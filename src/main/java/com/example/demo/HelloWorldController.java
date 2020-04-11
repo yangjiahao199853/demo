@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @RequestMapping("/hello")
     public String index(){
-        return "彭佳琪是猪，就知道吃吃吃";
+        return "hello spring boot";
     }
 }
