@@ -19,8 +19,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService              ;
+    private UserService userService;
 
     @RequestMapping("/getAll")
     public String getAll() {

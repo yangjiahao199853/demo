@@ -61,7 +61,6 @@
             <version>3.1.1</version>
         </dependency>
 
-        <!-- 提供mysql驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
