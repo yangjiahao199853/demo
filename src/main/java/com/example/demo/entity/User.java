@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Created by yjh on 2020/4/19 21:40
  */
 @Data
-@TableName("tbl_user")
+@TableName("user")
 public class User {
     @TableId(value = "user_id")
     private Long userId;
