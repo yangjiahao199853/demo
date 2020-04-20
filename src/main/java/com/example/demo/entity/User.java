@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -12,20 +13,11 @@ import java.io.Serializable;
  * Created by yjh on 2020/4/19 21:40
  */
 @Data
-@TableName("user")
-public class User implements Serializable{
-    private String id;
+@TableName("tbl_user")
+public class User {
+    @TableId(value = "user_id")
+    private Long userId;
     private String userName;
-    private String Password;
-    private String status;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + Password + '\'' +
-                '}';
-    }
+    private String password;
 }
 
