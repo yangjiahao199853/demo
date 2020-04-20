@@ -27,8 +27,9 @@ public class UserController {
     public String hello() {
         //insert
         User student = new User();
-        student.setUserName("zhangsan1");
+        student.setName("zhangsan1");
         student.setPassword("54");
+        student.setRemarks("zs");
         boolean res = iEthService.save(student);
         return res ? "success" : "fail";
     }

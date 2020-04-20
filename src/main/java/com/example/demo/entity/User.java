@@ -15,9 +15,10 @@ import java.io.Serializable;
 @Data
 @TableName("user")
 public class User {
-    @TableId(value = "user_id")
-    private Long userId;
-    private String userName;
+    @TableId(value = "id")
+    private int id;
+    private String name;
     private String password;
+    private String remarks;
 }
 
