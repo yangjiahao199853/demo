@@ -6,27 +6,26 @@
 
 二：数据库设计
 1：用户表：
-ID：					char(32)
+ID：					bigint(20)(32)
 用户名:userName			varchar(50)	
 密码：password			varchar(50)	
-邮箱:email				varchar(50)	
-状态：status（0:未激活，1:激活）	varchar(10)
+邮箱:email				varchar(50)
 
 2：图书表：
-ID: char(32)
+ID: bigint(20)
 书名：bookName			varchar(200)	
-作者：author     			varchar(200)	
+作者：author     		varchar(200)	
 价格：price				decimal(8,2)
-出版时间:publishtime		Datetime
-开本:booksize				Int
-序号:orderBy				Int
+出版时间:publishtime		Datetime    
+开本:booksize			bigint
+序号:orderBy			bigint
 
 3：购物车表：
-ID:char(32)
+ID:bigint(20)(32)
 数量：quantity			Int
-书号:bookId（外键，图书ID）	char(32)
-用户ID：userId(外键，用户ID）	char(32)
-序号：orderBy  			Int	
+书号:bookId（外键，图书ID）	bigint(20)
+用户ID：userId(外键，用户ID）	bigint(20)
+序号：orderBy  			varchar(50)	
 
 
 三：接口：

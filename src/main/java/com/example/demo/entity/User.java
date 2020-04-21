@@ -2,11 +2,7 @@ package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
-import java.io.Serializable;
-
 
 /**
  * yangjiahao: demo
@@ -16,9 +12,9 @@ import java.io.Serializable;
 @TableName("user")
 public class User {
     @TableId(value = "id")
-    private int id;
+    private Long id;
     private String name;
     private String password;
-    private String remarks;
+    private String email;
 }
 

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.impl.UserService;
-import com.example.demo.service.impl.UserServiceImpl;
+import com.example.demo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,19 +16,18 @@ import java.util.List;
  * Created by yjh on 2020/4/19 21:38
  */
 @Controller
-@RequestMapping("/eth")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserServiceImpl iEthService;
 
-    @RequestMapping("/hello")
+    @RequestMapping("/save")
     @ResponseBody
     public String hello() {
-        //insert
         User student = new User();
         student.setName("zhangsan1");
         student.setPassword("54");
-        student.setRemarks("zs");
+        student.setEmail("1551949453@qq.cpm");
         boolean res = iEthService.save(student);
         return res ? "success" : "fail";
     }
