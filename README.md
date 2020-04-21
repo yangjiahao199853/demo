@@ -16,7 +16,8 @@ ID: bigint(20)
 书名：bookName			varchar(200)	
 作者：author     		varchar(200)	
 价格：price				decimal(8,2)
-出版时间:publishtime		Datetime    
+出版时间:publish_time	Datetime
+修改时间:update_time		Datetime    
 开本:booksize			bigint
 
 3：购物车表：

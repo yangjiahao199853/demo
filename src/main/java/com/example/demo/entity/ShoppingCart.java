@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 @TableName(value = "")
 public class ShoppingCart {
-    private Long id;
-    private Long quantity;
-    private String bookId;
-    private Long userId;
-    private Long orderBy;
+    public Long id;
+    public Long quantity;
+    public String bookId;
+    public Long userId;
+    public Long orderBy;
 }

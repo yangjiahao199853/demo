@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -8,29 +10,30 @@ import java.util.Date;
  * @Date 2020/4/21 11:01
  * @Version 1.0
  **/
+@Data
 public class BookReq {
     /**
      * 书籍ID
      */
-    private Long book_Id;
+    public Long bookId;
     /**
      * 书籍名称
      */
-    private String book_Name;
+    public String bookName;
     /**
      * 作家
      */
-    private String author;
+    public String author;
     /**
      * 价格
      */
-    private BigDecimal price;
+    public BigDecimal price;
     /**
      * 发布时间
      */
-    private Date publishTime;
+    public Date publishTime;
     /**
      * 开本
      */
-    private Long bookSize;
+    public Long bookSize;
 }

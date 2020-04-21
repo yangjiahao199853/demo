@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.BookReq;
+import com.example.demo.entity.BookResp;
 import com.example.demo.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,5 +20,8 @@ public class BookController {
     @Autowired
     BookServiceImpl bookService;
 
+    public BookResp listByBookId(Long Id){
+        return bookService.selectByBookId(Id);
+    }
 
 }

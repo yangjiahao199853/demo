@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.example.demo.entity.Book;
 import org.springframework.stereotype.Service;
 
@@ -10,5 +10,6 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 @Service
-public interface BookService extends IService<Book> {
+public interface BookService extends BaseMapper<Book> {
+
 }
