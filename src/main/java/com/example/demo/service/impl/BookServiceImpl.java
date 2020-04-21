@@ -14,8 +14,10 @@ import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.BeanUtil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -39,12 +41,22 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
     }
 
 
-    public BookResp selectBookAll(BookReq req){
+    /**
+     * 通过书名或作者查询书籍
+     * @param req
+     * @return
+     */
+    public List<BookResp> selectBook(BookReq req){
+        EntityWrapper ew = getEw(req);
+        List<BookResp> bookResps=bookService.selectList(ew);
+        return bookResps;
+    }
+
+    public List<BookResp> selectBookAll(BookReq req){
         EntityWrapper ew = getEw(req);
         List<Book> book=bookService.selectList(ew);
-        BookResp bookResp=new BookResp();
-        BeanUtils.copyProperties(bookResp, book);
-        return bookResp;
+        List<BookResp> resultList = book.stream().map(data -> BeanUtil.map(data, BookResp.class)).collect(Collectors.toList());
+        return resultList;
     }
 
     private EntityWrapper getEw(BookReq req){

@@ -5,17 +5,18 @@ import com.example.demo.entity.BookResp;
 import com.example.demo.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author YangJiaHao
  * @Date 2020/4/21 10:37
  * @Version 1.0
  **/
-@Controller
+@RestController
 @ResponseBody
-@RequestMapping("/Book")
+@RequestMapping("/Book/")
 public class BookController {
     @Autowired
     BookServiceImpl bookService;
@@ -24,7 +25,13 @@ public class BookController {
         return bookService.selectByBookId(Id);
     }
 
-    public BookResp BookResp(BookReq req){
+    @RequestMapping(value = "getBookResp", method = RequestMethod.POST)
+    public List<BookResp> getBookResp(@RequestBody BookReq req){
+        return bookService.selectBook(req);
+    }
+
+    @RequestMapping(value = "getBookResp", method = RequestMethod.POST)
+    public List<BookResp> getBookAll(@RequestBody BookReq req){
         return bookService.selectBookAll(req);
     }
 
