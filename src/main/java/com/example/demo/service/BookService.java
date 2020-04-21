@@ -1,8 +1,11 @@
 package com.example.demo.service;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.example.demo.entity.Book;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author YangJiaHao
@@ -11,5 +14,5 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public interface BookService extends BaseMapper<Book> {
-
+    List<Book> selectPageUserList(Page page, Book book);
 }

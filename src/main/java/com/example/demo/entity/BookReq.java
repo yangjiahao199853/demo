@@ -36,4 +36,6 @@ public class BookReq {
      * 开本
      */
     public Long bookSize;
+    public String pageNum;;
+    public String pageSize;;
 }

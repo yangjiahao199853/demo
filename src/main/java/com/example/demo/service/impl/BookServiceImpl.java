@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.example.demo.entity.Book;
@@ -68,5 +69,17 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
         }
         ew.orderDesc(Lists.newArrayList("update_time"));
         return ew;
+    }
+
+    public Page<Book> selectBookPage(BookReq req){
+//        Page<Book> page = new Page<Book>(req.getPageNum(), req.getPageSize());// 当前页，总条数 构造 page 对象
+        //sql优化，OptimizeCountSql默认为true，优化，不执行select count(1)操作
+        //page.setOptimizeCountSql(false);
+        // 查询总记录数，默认是查询
+        // page.setSearchCount(false);
+        // 注意！！ 分页 total 是经过插件自动 回写 到传入 page 对象
+        EntityWrapper ew = getEw(req);
+//        return page.setRecords(baseMapper.selectMapsPage(page, Book));
+        return null;
     }
 }
