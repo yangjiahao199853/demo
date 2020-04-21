@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserDao;
 import org.springframework.stereotype.Service;

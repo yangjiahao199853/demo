@@ -24,7 +24,7 @@ public class UserController {
         student.setName("zhangsan1");
         student.setPassword("54");
         student.setEmail("1551949453@qq.cpm");
-        boolean res = iEthService.save(student);
+        boolean res = iEthService.insert(student);
         return res ? "success" : "fail";
     }
 }

@@ -24,4 +24,8 @@ public class BookController {
         return bookService.selectByBookId(Id);
     }
 
+    public BookResp BookResp(BookReq req){
+        return bookService.selectBookAll(req);
+    }
+
 }

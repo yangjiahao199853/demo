@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS demo;
+Create Database If Not Exists demo Character Set UTF8;
 
 CREATE TABLE user
 (
