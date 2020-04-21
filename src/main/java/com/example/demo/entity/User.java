@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
 /**
@@ -11,10 +13,12 @@ import lombok.Data;
 @Data
 @TableName("user")
 public class User {
-    @TableId(value = "id")
+    @TableId(value = "user_id",type = IdType.AUTO)
     public Long id;
-    public String name;
+    @TableField(value = "user_name")
+    public String userName;
     public String password;
     public String email;
+    public String status;
 }
 

@@ -14,5 +14,4 @@ import java.util.List;
  **/
 @Service
 public interface BookService extends BaseMapper<Book> {
-    List<Book> selectPageUserList(Page page, Book book);
 }

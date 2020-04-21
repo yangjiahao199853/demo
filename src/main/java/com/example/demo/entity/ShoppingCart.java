@@ -1,14 +1,18 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
 @Data
-@TableName(value = "")
+@TableName("shopping_Cat")
 public class ShoppingCart {
+    @TableId(value = "shopping_Cat_Id")
     public Long id;
     public Long quantity;
-    public String bookId;
+    @TableField(value = "book_Id")
+    public Long bookId;
+    @TableField(value = "user_Id")
     public Long userId;
-    public Long orderBy;
 }

@@ -14,8 +14,9 @@ import org.apache.logging.log4j.util.Strings;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import util.BeanUtil;
+import com.example.demo.util.BeanUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,12 +28,14 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
+@Repository
 public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
 
     @Autowired
     private BookService bookService;
 
     public static final String BOOK_NAME = "book_Name";
+
 
     public BookResp selectByBookId(Long Id){
         Book book=bookService.selectById(Id);
@@ -58,6 +61,12 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
         List<Book> book=bookService.selectList(ew);
         List<BookResp> resultList = book.stream().map(data -> BeanUtil.map(data, BookResp.class)).collect(Collectors.toList());
         return resultList;
+    }
+
+    public Integer updateBookById(BookReq req){
+        EntityWrapper ew = getEw(req);
+        Book book=new Book();
+        return bookService.update(book,ew);
     }
 
     private EntityWrapper getEw(BookReq req){

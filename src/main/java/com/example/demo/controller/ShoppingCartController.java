@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Version 1.0
  **/
 @RequestMapping("/Shopping")
-@Controller
 @ResponseBody
+@Controller
 public class ShoppingCartController {
 
     @Autowired

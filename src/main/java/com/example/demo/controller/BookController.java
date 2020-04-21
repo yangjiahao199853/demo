@@ -14,18 +14,19 @@ import java.util.List;
  * @Date 2020/4/21 10:37
  * @Version 1.0
  **/
-@RestController
+
 @ResponseBody
 @RequestMapping("/Book/")
+@Controller
 public class BookController {
     @Autowired
     BookServiceImpl bookService;
-
+    @RequestMapping(value = "getBookById", method = RequestMethod.POST)
     public BookResp listByBookId(Long Id){
         return bookService.selectByBookId(Id);
     }
 
-    @RequestMapping(value = "getBookResp", method = RequestMethod.POST)
+    @RequestMapping(value = "getBook", method = RequestMethod.POST)
     public List<BookResp> getBookResp(@RequestBody BookReq req){
         return bookService.selectBook(req);
     }

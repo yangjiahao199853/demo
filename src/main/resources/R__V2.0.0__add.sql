@@ -1,0 +1,33 @@
+Create Database If Not Exists demo Character Set UTF8;
+
+CREATE TABLE IF NOT EXISTS demo.`user` (
+(
+	user_Id BIGINT(20) NOT NULL COMMENT '主键ID',
+	user_name VARCHAR(50) NULL DEFAULT NULL COMMENT '姓名',
+	password VARCHAR(50) NULL DEFAULT NULL COMMENT '年龄',
+	email VARCHAR(50) NULL DEFAULT NULL COMMENT '年龄',
+	PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+
+CREATE TABLE IF NOT EXISTS demo.`book` (
+(
+	book_Id BIGINT(20) NOT NULL COMMENT '主键ID',
+	book_Name VARCHAR(50) NULL DEFAULT NULL COMMENT '书名',
+	author VARCHAR(50) NULL DEFAULT NULL COMMENT '作者',
+	price decimal(8,2) NULL DEFAULT NULL COMMENT '价格',
+	publish_Time Datetime NULL DEFAULT NULL COMMENT '出版时间',
+	update_Time Datetime NULL DEFAULT NULL COMMENT '修改时间',
+	booksize NULL DEFAULT NULL COMMENT '开本',
+	PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='书籍表';
+
+
+
+CREATE TABLE IF NOT EXISTS demo.`shopping_Cat` (
+(
+	shopping_Cat_Id BIGINT(20) NOT NULL COMMENT '购物车ID',
+	quantity INT(11) NULL DEFAULT NULL COMMENT '数量',
+	book_Id BIGINT(20) NULL DEFAULT NULL COMMENT '书籍ID',
+	user_Id BIGINT(20) NULL DEFAULT NULL COMMENT '用户ID',
+	PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='购物车表';

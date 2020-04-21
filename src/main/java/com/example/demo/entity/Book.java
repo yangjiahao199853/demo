@@ -1,20 +1,27 @@
 package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@TableName(value = "")
+@TableName("book")
 public class Book {
-    @TableField(value = "create_by")
-    private Long book_Id;
-    private String book_Name;
+    @TableId(value = "book_Id",type = IdType.AUTO)
+    private Long id;
+    @TableField(value = "book_Name")
+    private String bookName;
     private String author;
-    private String price;
+    private BigDecimal price;
+    @TableField(value = "publish_Time")
     private Date publishTime;
-    private Long bookSize;
-    private Long orderBy;
+    @TableField(value = "update_Time")
+    private Date updateTime;
+    private Long booksize;
 }
