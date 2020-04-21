@@ -7,23 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.User;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import java.util.List;
-
-
 /**
  * yangjiahao: demo
  * Created by yjh on 2020/4/19 21:38
  */
 @Controller
+@ResponseBody
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     UserServiceImpl iEthService;
 
     @RequestMapping("/save")
-    @ResponseBody
-    public String hello() {
+    public String get() {
         User student = new User();
         student.setName("zhangsan1");
         student.setPassword("54");

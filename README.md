@@ -18,14 +18,12 @@ ID: bigint(20)
 价格：price				decimal(8,2)
 出版时间:publishtime		Datetime    
 开本:booksize			bigint
-序号:orderBy			bigint
 
 3：购物车表：
 ID:bigint(20)(32)
 数量：quantity			Int
 书号:bookId（外键，图书ID）	bigint(20)
 用户ID：userId(外键，用户ID）	bigint(20)
-序号：orderBy  			varchar(50)	
 
 
 三：接口：
