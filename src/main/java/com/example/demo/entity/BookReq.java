@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author YangJiaHao
@@ -36,6 +37,8 @@ public class BookReq {
      * 开本
      */
     public Long bookSize;
-    public Integer  pageNum;;
-    public Integer  pageSize;;
+
+    public Integer  pageNum;
+    public Integer  pageSize;
+    private List<Long> ids;
 }

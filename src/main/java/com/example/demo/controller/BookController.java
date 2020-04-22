@@ -36,4 +36,21 @@ public class BookController {
         return bookService.selectBookAll(req);
     }
 
+
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public Boolean updateBookById(@RequestBody BookReq req){
+        return bookService.updateBookById(req);
+    }
+
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public Boolean saveBook(@RequestBody BookReq req){
+        return bookService.saveBook(req);
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public Boolean deleteBook(@RequestBody BookReq req){
+        return bookService.saveBook(req);
+    }
+
+
 }

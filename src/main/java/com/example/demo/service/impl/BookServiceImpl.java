@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import com.example.demo.util.BeanUtil;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,10 +64,26 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
         return resultList;
     }
 
-    public Integer updateBookById(BookReq req){
-        EntityWrapper ew = getEw(req);
-        Book book=new Book();
-        return bookService.update(book,ew);
+    public Boolean updateBookById(BookReq req){
+        Book book=BeanUtil.map(req,Book.class);
+        book.setUpdateTime(new Date());
+        bookService.updateById(book);
+        return true;
+    }
+
+
+    public Boolean saveBook(BookReq req){
+        Book book=BeanUtil.map(req,Book.class);
+        book.setUpdateTime(new Date());
+        bookService.insert(book);
+        return true;
+    }
+
+
+    public Boolean deleteBook(BookReq req){
+        Book book=BeanUtil.map(req,Book.class);
+        bookService.deleteBatchIds(req.getIds());
+        return true;
     }
 
     private EntityWrapper getEw(BookReq req){
