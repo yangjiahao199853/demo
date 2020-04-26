@@ -2,24 +2,19 @@ package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
 /**
  * yangjiahao: demo
- * Created by yjh on 2020/4/19 21:40
+ * Created by yjh on 2020/4/26 22:29
  */
 @Data
-@TableName("user")
-public class User {
-    @TableId(value = "user_id",type = IdType.AUTO)
+public class UserReq {
     public Long id;
-    @TableField(value = "username")
     public String userName;
     public String password;
     public String useremail;
     public int status;
     public String code;
 }
-
