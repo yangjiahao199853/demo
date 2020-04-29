@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 @Service
-public interface ShoppingCartService extends IService<ShoppingCart> {
+public interface ShoppingCartService{
 }
