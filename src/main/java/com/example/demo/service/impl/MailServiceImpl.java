@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 /**
  * yangjiahao: demo
  * Created by yjh on 2020/4/26 22:18
+ * @author yangjiahao
  */
 @Service
 public class MailServiceImpl implements MailService {

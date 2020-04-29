@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.enums.SqlLike;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserReq;
 import com.example.demo.mapper.UserDao;
@@ -24,15 +25,14 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Autowired
-    private MailService mailService;
+    private MailServiceImpl mailService;
 
     /**
      * 用户注册，同时发送一封激活邮件
      * @param user
      */
-    @Override
     public void register(User user) {
-        userDao.register(user);
+        userDao.insert(user);
         String code = user.getCode();
         System.out.println("code:"+code);
         String subject = "来自xxx网站的激活邮件";
@@ -47,19 +47,18 @@ public class UserServiceImpl implements UserService {
      * @param code
      * @return
      */
-    @Override
     public User checkCode(String code) {
-
-        return userDao.checkCode(code);
+        EntityWrapper ew = new EntityWrapper();
+        ew.eq(code!=null,"code",code);
+        return userDao.selectById(ew);
     }
 
     /**
      * 激活账户，修改用户状态
      * @param user
      */
-    @Override
     public void updateUserStatus(User user) {
-        userDao.updateUserStatus(user);
+        userDao.updateById(user);
     }
 
     /**
@@ -67,9 +66,8 @@ public class UserServiceImpl implements UserService {
      * @param user
      * @return
      */
-    @Override
     public User loginUser(User user) {
-        User user1 = userDao.loginUser(user);
+        User user1 = userDao.selectOne(user);
         if (user1 !=null){
             return user1;
         }
