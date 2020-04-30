@@ -8,6 +8,7 @@ import com.example.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.User;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -94,11 +95,11 @@ public class UserController {
     @RequestMapping(value = "/loginUser",method = { RequestMethod.POST, RequestMethod.GET })
     public  String setCookies(HttpServletRequest request,UserReq user){
        List<UserResp> userResps = userService.loginUser(user);
+        HttpSession session = request.getSession();
+        session.setAttribute("userId", userResps.get(0).getId());
         if (userResps !=null){
             return "welcome";
         }
-        HttpSession session = request.getSession();
-        session.setAttribute("userId", userResps.get(0).getId());
         return "login";
     }
 
@@ -108,6 +109,11 @@ public class UserController {
         HttpSession session = request.getSession();
         String data = (String) session.getAttribute("userId");
         return data;
+    }
+
+    @GetMapping("/getLoginUserInfo")
+    public Object getLoginUserInfo(User user) {
+        return user;
     }
 }
 
