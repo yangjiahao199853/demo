@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.common.UUIDUtils;
 import com.example.demo.entity.UserReq;
+import com.example.demo.entity.UserResp;
 import com.example.demo.service.UserService;
 import com.example.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.User;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 /**
@@ -45,16 +51,19 @@ public class UserController {
      */
     @RequestMapping(value = "/checkCode")
     public String checkCode(String code){
-        User user = userService.checkCode(code);
-        System.out.println(user);
+        List<User> listUser = userService.checkCode(code);
+        System.out.println(listUser);
         //如果用户不等于null，把用户状态修改status=1
-        if (user !=null){
-            user.setStatus(1);
-            //把code验证码清空，已经不需要了
-            user.setCode("");
-            System.out.println(user);
-            userService.updateUserStatus(user);
-        }
+        listUser.forEach(user -> {
+            if (user !=null){
+                user.setStatus(1);
+                //把code验证码清空，已经不需要了
+                user.setCode("");
+                System.out.println(user);
+                userService.updateUserStatus(user);
+            }
+        });
+
         return "login";
     }
 
@@ -67,16 +76,38 @@ public class UserController {
         return "login";
     }
 
+
+//    @RequestMapping(value = "/loginUser")
+//    public String login(UserReq userReq){
+//        User u = userService.loginUser(userReq);
+//        if (u !=null){
+//            return "welcome";
+//        }
+//        return "login";
+//    }
+
+
     /**
      * 登录
      */
-    @RequestMapping(value = "/loginUser")
-    public String login(User user, Model model){
-        User u = userService.loginUser(user);
-        if (u !=null){
+    @ResponseBody
+    @RequestMapping(value = "/loginUser",method = { RequestMethod.POST, RequestMethod.GET })
+    public  String setCookies(HttpServletRequest request,UserReq user){
+       List<UserResp> userResps = userService.loginUser(user);
+        if (userResps !=null){
             return "welcome";
         }
+        HttpSession session = request.getSession();
+        session.setAttribute("userId", userResps.get(0).getId());
         return "login";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getSession",method = { RequestMethod.POST, RequestMethod.GET })
+    public String getCookies(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String data = (String) session.getAttribute("userId");
+        return data;
     }
 }
 

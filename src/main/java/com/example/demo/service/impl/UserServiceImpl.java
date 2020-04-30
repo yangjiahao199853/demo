@@ -1,14 +1,12 @@
 package com.example.demo.service.impl;
 
-import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserReq;
+import com.example.demo.entity.UserResp;
 import com.example.demo.mapper.UserDao;
-import com.example.demo.service.MailService;
 import com.example.demo.service.UserService;
-import org.apache.logging.log4j.util.Strings;
-import org.assertj.core.util.Lists;
+import com.example.demo.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,10 +45,10 @@ public class UserServiceImpl implements UserService {
      * @param code
      * @return
      */
-    public User checkCode(String code) {
+    public List<User> checkCode(String code) {
         EntityWrapper ew = new EntityWrapper();
         ew.eq(code!=null,"code",code);
-        return userDao.selectById(ew);
+        return userDao.selectList(ew);
     }
 
     /**
@@ -63,13 +61,17 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登录
-     * @param user
+     * @param userReq
      * @return
      */
-    public User loginUser(User user) {
-        User user1 = userDao.selectOne(user);
-        if (user1 !=null){
-            return user1;
+    public List<UserResp> loginUser(UserReq userReq) {
+        User UserEntity= BeanUtil.map(userReq,User.class);
+        EntityWrapper ew = new EntityWrapper();
+        ew.eq(userReq.userName!=null,"username",userReq.userName);
+        ew.eq(userReq.userName!=null,"password",userReq.password);
+        List<UserResp> userResps = userDao.selectList(ew);
+        if (userResps !=null){
+            return userResps;
         }
         return null;
     }
