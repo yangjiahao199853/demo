@@ -1,18 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.UUIDUtils;
+import com.example.demo.config.MD5Utils;
 import com.example.demo.entity.UserReq;
 import com.example.demo.entity.UserResp;
-import com.example.demo.service.UserService;
 import com.example.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 import com.example.demo.entity.User;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,14 +28,14 @@ public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
-
     /**
      * 注册
      * @param user
      * @return
      */
     @RequestMapping(value = "/registerUser")
-    public String register(User user){
+    public String register(@RequestBody UserReq user) throws Exception {
+        user.setPassword(MD5Utils.md5(user.password));
         user.setStatus(0);
         String code = UUIDUtils.getUUID()+ UUIDUtils.getUUID();
         user.setCode(code);
@@ -53,14 +50,12 @@ public class UserController {
     @RequestMapping(value = "/checkCode")
     public String checkCode(String code){
         List<User> listUser = userService.checkCode(code);
-        System.out.println(listUser);
         //如果用户不等于null，把用户状态修改status=1
         listUser.forEach(user -> {
             if (user !=null){
                 user.setStatus(1);
-                //把code验证码清空，已经不需要了
+                //激活，把code验证码清空
                 user.setCode("");
-                System.out.println(user);
                 userService.updateUserStatus(user);
             }
         });
@@ -78,14 +73,6 @@ public class UserController {
     }
 
 
-//    @RequestMapping(value = "/loginUser")
-//    public String login(UserReq userReq){
-//        User u = userService.loginUser(userReq);
-//        if (u !=null){
-//            return "welcome";
-//        }
-//        return "login";
-//    }
 
 
     /**
@@ -93,11 +80,12 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value = "/loginUser",method = { RequestMethod.POST, RequestMethod.GET })
-    public  String setCookies(HttpServletRequest request,UserReq user){
+    public  String setCookies(@RequestBody UserReq user){
+        user.setPassword(MD5Utils.md5(user.password));
        List<UserResp> userResps = userService.loginUser(user);
-        HttpSession session = request.getSession();
-        session.setAttribute("userId", userResps.get(0).getId());
-        if (userResps !=null){
+//        HttpSession session = request.getSession();
+//        session.setAttribute("userId", userResps.get(0).getId());
+        if (!CollectionUtils.isEmpty(userResps)){
             return "welcome";
         }
         return "login";

@@ -19,20 +19,29 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
-    public boolean supportsParameter(MethodParameter parameter) {
-        Class<?> clazz = parameter.getParameterType();
-        return clazz==User.class;
+    public boolean supportsParameter(MethodParameter methodParameter) {
+        return false;
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-        String token = request.getParameter("token");
-        // 然后根据token获取用户登录信息，这里省略获取用户信息的过程，随便填写一些数据
-        User loginUser = new User();
-        loginUser.setId(1L);
-        loginUser.setUserName("lizhencheng");
-        return loginUser;
+    public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
+        return null;
     }
+//    @Override
+//    public boolean supportsParameter(MethodParameter parameter) {
+//        Class<?> clazz = parameter.getParameterType();
+//        return clazz==User.class;
+//    }
+//
+//    @Override
+//    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+//        HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+//        HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
+//        String token = request.getParameter("token");
+//        // 然后根据token获取用户登录信息，这里省略获取用户信息的过程，随便填写一些数据
+//        User loginUser = new User();
+//        loginUser.setId(1L);
+//        loginUser.setUserName("lizhencheng");
+//        return loginUser;
+//    }
 }
