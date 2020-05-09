@@ -1,33 +1,71 @@
-Create Database If Not Exists demo Character Set UTF8;
 
-CREATE TABLE IF NOT EXISTS demo.`user` (
-(
-	user_Id BIGINT(20) NOT NULL COMMENT '主键ID',
-	user_name VARCHAR(50) NULL DEFAULT NULL COMMENT '姓名',
-	password VARCHAR(50) NULL DEFAULT NULL COMMENT '年龄',
-	email VARCHAR(50) NULL DEFAULT NULL COMMENT '年龄',
-	PRIMARY KEY (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `user_role`;
+DROP TABLE IF EXISTS `role_permission`;
+DROP TABLE IF EXISTS `permission`;
 
-CREATE TABLE IF NOT EXISTS demo.`book` (
-(
-	book_Id BIGINT(20) NOT NULL COMMENT '主键ID',
-	book_Name VARCHAR(50) NULL DEFAULT NULL COMMENT '书名',
-	author VARCHAR(50) NULL DEFAULT NULL COMMENT '作者',
-	price decimal(8,2) NULL DEFAULT NULL COMMENT '价格',
-	publish_Time Datetime NULL DEFAULT NULL COMMENT '出版时间',
-	update_Time Datetime NULL DEFAULT NULL COMMENT '修改时间',
-	booksize NULL DEFAULT NULL COMMENT '开本',
-	PRIMARY KEY (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='书籍表';
+CREATE TABLE `user` (
+`id` bigint(11) NOT NULL AUTO_INCREMENT,
+`username` varchar(255) NOT NULL,
+`password` varchar(255) NOT NULL,
+`useremail` varchar(255) NULL DEFAULT NULL COMMENT '邮箱',
+`status` int DEFAULT NULL,
+`code` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+);
+CREATE TABLE `role` (
+`id` bigint(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+PRIMARY KEY (`id`)
+);
+CREATE TABLE `user_role` (
+`user_id` bigint(11) NOT NULL,
+`role_id` bigint(11) NOT NULL
+);
+CREATE TABLE `role_permission` (
+`role_id` bigint(11) NOT NULL,
+`permission_id` bigint(11) NOT NULL
+);
+CREATE TABLE `permission` (
+`id` bigint(11) NOT NULL AUTO_INCREMENT,
+`url` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL,
+`description` varchar(255) NULL,
+`pid` bigint(11) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `book` (
+`id` bigint(11) NOT NULL AUTO_INCREMENT,
+`book_Name` varchar(255) NOT NULL,
+`author` varchar(255) NOT NULL,
+`price` decimal(8,2) NULL,
+`publish_Time` Datetime NULL DEFAULT NULL COMMENT '出版时间',
+`update_Time` Datetime NULL DEFAULT NULL COMMENT '修改时间',
+`booksize` varchar(255) NOT NULL,
+PRIMARY KEY (`id`)
+);
 
 
+CREATE TABLE `shopping_cat` (
+`id` bigint(11) NOT NULL AUTO_INCREMENT,
+`quantity` INT(11) NOT NULL,
+`book_Id` BIGINT(20) NOT NULL,
+`user_Id` BIGINT(20) NULL,
+PRIMARY KEY (`id`)
+);
 
-CREATE TABLE IF NOT EXISTS demo.`shopping_Cat` (
-(
-	shopping_Cat_Id BIGINT(20) NOT NULL COMMENT '购物车ID',
-	quantity INT(11) NULL DEFAULT NULL COMMENT '数量',
-	book_Id BIGINT(20) NULL DEFAULT NULL COMMENT '书籍ID',
-	user_Id BIGINT(20) NULL DEFAULT NULL COMMENT '用户ID',
-	PRIMARY KEY (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='购物车表';
+
+INSERT INTO user (id, username, password) VALUES (1,'user','e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO user (id, username , password) VALUES (2,'admin','e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO role (id, name) VALUES (1,'USER');
+INSERT INTO role (id, name) VALUES (2,'ADMIN');
+INSERT INTO permission (id, url, name, pid) VALUES (1,'/user/common','common',0);
+INSERT INTO permission (id, url, name, pid) VALUES (2,'/user/admin','admin',0);
+INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO role_permission (role_id, permission_id) VALUES (1, 1);
+INSERT INTO role_permission (role_id, permission_id) VALUES (2, 1);
+INSERT INTO role_permission (role_id, permission_id) VALUES (2, 2);
