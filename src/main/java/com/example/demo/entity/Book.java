@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @TableName("book")
 public class Book {
-    @TableId(value = "book_Id",type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
     @TableField(value = "book_Name")
     private String bookName;

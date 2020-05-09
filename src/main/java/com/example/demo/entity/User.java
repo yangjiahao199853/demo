@@ -16,28 +16,49 @@ import java.util.List;
  * yangjiahao: demo
  * Created by yjh on 2020/4/19 21:40
  */
-@Data
-@TableName("user")
 public class User  implements UserDetails, Serializable {
-    @TableId(value = "user_id",type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.AUTO)
     public Long id;
     @TableField(value = "username")
-    public String userName;
+    public String username;
     public String password;
     public String useremail;
     public int status;
     public String code;
 
-    private List<Role> authorities;
 
-    @Override
-    public List<Role> getAuthorities() {
-        return authorities;
+
+
+    private List<Role> authorities;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public List<Role> getAuthorities() {
+        return authorities;
     }
 
     public void setAuthorities(List<Role> authorities) {
@@ -76,5 +97,12 @@ public class User  implements UserDetails, Serializable {
         return true;
     }
 
+
+    public void setStatus(int i) {
+    }
+
+
+    public void setCode(String s) {
+    }
 }
 

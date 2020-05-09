@@ -38,14 +38,14 @@ public class IndexController {
         return "401";
     }
 
-    @GetMapping("/user/common")
-    public String common() {
-        return "user/common";
-    }
-
-    @GetMapping("/user/admin")
-    public String admin() {
-        return "user/admin";
-    }
+//    @GetMapping("/user/common")
+//    public String common() {
+//        return "user/common";
+//    }
+//
+//    @GetMapping("/user/admin")
+//    public String admin() {
+//        return "user/admin";
+//    }
 
 }
