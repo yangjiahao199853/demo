@@ -8,11 +8,12 @@ import lombok.Data;
 @Data
 @TableName("shopping_Cat")
 public class ShoppingCart {
-    @TableId(value = "shopping_Cat_Id")
+    @TableId(value = "id")
     public Long id;
     public Long quantity;
     @TableField(value = "book_Id")
     public Long bookId;
     @TableField(value = "user_Id")
     public Long userId;
+
 }

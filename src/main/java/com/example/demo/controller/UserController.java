@@ -86,9 +86,9 @@ public class UserController {
 //        HttpSession session = request.getSession();
 //        session.setAttribute("userId", userResps.get(0).getId());
         if (!CollectionUtils.isEmpty(userResps)){
-            return "welcome";
+            return "redirect:/index";
         }
-        return "login";
+        return "登录失败";
     }
 
     @ResponseBody
@@ -103,6 +103,34 @@ public class UserController {
     public Object getLoginUserInfo(User user) {
         return user;
     }
+
+
+    @PostMapping("/common")
+    public String common() {
+        return "zs";
+    }
+
+
+
+    /**
+     *校验邮箱中的code激活账户
+     * 首先根据激活码code查询用户，之后再把状态修改为"1"
+     */
+    @RequestMapping(value = "/admin")
+    public String zs(String code){
+        List<User> listUser = userService.checkCode(code);
+        //如果用户不等于null，把用户状态修改status=1
+        listUser.forEach(user -> {
+            if (user !=null){
+                user.setStatus(1);
+                //激活，把code验证码清空
+                user.setCode("");
+                userService.updateUserStatus(user);
+            }
+        });
+        return "login";
+    }
+
 }
 
 
