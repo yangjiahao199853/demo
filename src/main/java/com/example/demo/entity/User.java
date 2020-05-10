@@ -16,6 +16,8 @@ import java.util.List;
  * yangjiahao: demo
  * Created by yjh on 2020/4/19 21:40
  */
+@Data
+@TableName("user")
 public class User  implements UserDetails, Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     public Long id;
@@ -25,9 +27,6 @@ public class User  implements UserDetails, Serializable {
     public String useremail;
     public int status;
     public String code;
-
-
-
 
     private List<Role> authorities;
     public Long getId() {

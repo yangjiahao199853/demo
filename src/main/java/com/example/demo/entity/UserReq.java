@@ -17,4 +17,5 @@ public class UserReq {
     public String useremail;
     public int status;
     public String code;
+    public String authorities;
 }

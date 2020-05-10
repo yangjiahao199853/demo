@@ -53,6 +53,7 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
      */
     public List<BookResp> selectBook(BookReq req){
         EntityWrapper ew = getEw(req);
+        ew.eq("id",1);
         List<BookResp> bookResps=bookService.selectList(ew);
         return bookResps;
     }

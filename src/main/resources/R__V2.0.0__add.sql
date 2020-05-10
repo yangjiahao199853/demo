@@ -57,8 +57,8 @@ PRIMARY KEY (`id`)
 );
 
 
-INSERT INTO user (id, username, password) VALUES (1,'user','e10adc3949ba59abbe56e057f20f883e');
-INSERT INTO user (id, username , password) VALUES (2,'admin','e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO user (id, username, password) VALUES (1,'user','202cb962ac59075b964b07152d234b70');
+INSERT INTO user (id, username , password) VALUES (2,'admin','202cb962ac59075b964b07152d234b70');
 INSERT INTO role (id, name) VALUES (1,'USER');
 INSERT INTO role (id, name) VALUES (2,'ADMIN');
 INSERT INTO permission (id, url, name, pid) VALUES (1,'/user/common','common',0);
