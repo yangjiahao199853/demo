@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,7 +37,6 @@ public class IndexController {
 
     @RequestMapping("/login")
     public String login() {
-
         return "login";
     }
 
@@ -53,11 +54,18 @@ public class IndexController {
     @GetMapping("user/common")
     public String common() {
         BookReq req=new BookReq();
-        List<BookResp> list=bookService.selectBook(req);
-        list.forEach(x->{
-            System.out.printf(x.toString());
-        });
-        return "user/common";
+        req.setBookName("三国演义");
+        req.setBookSize(15L);
+        BigDecimal bignum1 = new BigDecimal("10");
+        req.setPrice(bignum1);
+        req.setPublishTime(new Date());
+        req.setAuthor("罗贯中");
+        req.setBookSize(1L);
+        Boolean s=bookService.saveBook(req);
+//        list.forEach(x->{
+//            System.out.printf(x.toString());
+//        });
+        return "增加成功";
     }
 
     @GetMapping("user/admin")

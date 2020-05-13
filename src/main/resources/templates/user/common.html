@@ -1,9 +1,18 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>common page</title>
 </head>
 <body>
-    查看书籍
+    <form th:action="@{/book/save}" method="post">
+        BookName: <input type="text" name="bookName"><br>
+        BookSize: <input type="text" name="BookSize"><br>
+        Price: <input type="text" name="price"><br>
+        PublishTime: <input type="Date" name="publishTime"><br>
+        Author: <input type="text" name="author"><br>
+        BookSize: <input type="text" name="bookSize"><br>
+        <input type="submit" value="新增书籍" />
+    </form>
 </body>
 </html>

@@ -80,7 +80,7 @@ public class UserController {
      * 登录
      */
     @ResponseBody
-    @RequestMapping(value = "/loginUser", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/loginUser", method = {RequestMethod.POST})
     public String setCookies(@RequestBody UserReq user) {
         user.setPassword(MD5Utils.md5(user.password));
         List<UserResp> userResps = userService.loginUser(user);
@@ -104,10 +104,10 @@ public class UserController {
     }
 
 
-//    @PostMapping("/common")
-//    public String common() {
-//        return "zs";
-//    }
+    @PostMapping("/common")
+    public String common() {
+        return "zs";
+    }
 
 
     /**

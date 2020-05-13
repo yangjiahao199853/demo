@@ -33,6 +33,11 @@ public class BookReq {
      * 发布时间
      */
     public Date publishTime;
+
+    /**
+     * 创建时间
+     */
+    public Date updateTime;
     /**
      * 开本
      */

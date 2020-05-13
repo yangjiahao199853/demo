@@ -16,7 +16,7 @@ import java.util.List;
  **/
 
 @ResponseBody
-@RequestMapping("/Book/")
+@RequestMapping("/book/")
 @Controller
 public class BookController {
     @Autowired
@@ -42,14 +42,14 @@ public class BookController {
         return bookService.updateBookById(req);
     }
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.GET})
     public Boolean saveBook(@RequestBody BookReq req){
         return bookService.saveBook(req);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public Boolean deleteBook(@RequestBody BookReq req){
-        return bookService.saveBook(req);
+        return bookService.deleteBook(req);
     }
 
 

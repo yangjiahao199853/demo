@@ -26,7 +26,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     public Boolean addShoppingCat(ShoppingCartReq shoppingCartReq) {
         ShoppingCart shoppingCart = BeanUtil.map(shoppingCartReq, ShoppingCart.class);
-        List<ShoppingCart> list = selectShoppingCatByUserId(shoppingCart.getUserId());
+        List<ShoppingCart> list = selectShoppingCatByUserId(shoppingCartReq);
         if (CollectionUtils.isNotEmpty(list)){
             list.forEach(ShoppingCart->{
                 shoppingCatDao.insert(shoppingCart);
@@ -38,9 +38,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
 
-    public List<ShoppingCart> selectShoppingCatByUserId(Long Id) {
-        ShoppingCartReq req = new ShoppingCartReq();
-        req.setUserId(Id);
+    public List<ShoppingCart> selectShoppingCatByUserId(ShoppingCartReq req) {
         EntityWrapper ew = getEntityWrapper(req);
         List<ShoppingCart> shoppingCartList = shoppingCatDao.selectList(ew);
         return shoppingCartList;

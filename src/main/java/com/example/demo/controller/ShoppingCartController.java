@@ -30,9 +30,9 @@ public class ShoppingCartController {
     @RequestMapping(value = "/getSelectShoppingCart",method = { RequestMethod.POST, RequestMethod.GET })
     public List<ShoppingCart> getSelectShoppingCart(HttpServletRequest request, ShoppingCartReq req){
         HttpSession session = request.getSession();
-        Long data = (Long) session.getAttribute("userId");
-        req.setUserId(data);
-        return shoppingCartService.selectShoppingCatByUserId(data);
+        Long userId = (Long) session.getAttribute("userId");
+        req.setUserId(userId);
+        return shoppingCartService.selectShoppingCatByUserId(req);
     }
 
 

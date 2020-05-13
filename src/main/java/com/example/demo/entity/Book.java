@@ -23,5 +23,6 @@ public class Book {
     private Date publishTime;
     @TableField(value = "update_Time")
     private Date updateTime;
-    private Long booksize;
+    @TableField(value = "booksize")
+    private Long bookSize;
 }
