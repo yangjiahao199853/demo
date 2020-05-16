@@ -21,33 +21,33 @@ import java.util.List;
 public class BookController {
     @Autowired
     BookServiceImpl bookService;
-    @RequestMapping(value = "getBookById", method = RequestMethod.POST)
-    public BookResp listByBookId(Long Id){
+    @RequestMapping(value = "getBookById", method = RequestMethod.GET)
+    public BookResp listByBookId(@RequestParam Long Id){
         return bookService.selectByBookId(Id);
     }
 
-    @RequestMapping(value = "getBook", method = RequestMethod.POST)
+    @RequestMapping(value = "getBook", method = RequestMethod.GET)
     public List<BookResp> getBookResp(@RequestBody BookReq req){
         return bookService.selectBook(req);
     }
 
-    @RequestMapping(value = "getBookResp", method = RequestMethod.POST)
-    public List<BookResp> getBookAll(@RequestBody BookReq req){
-        return bookService.selectBookAll(req);
-    }
+//    @RequestMapping(value = "getBookResp", method = RequestMethod.GET)
+//    public List<BookResp> getBookAll(@RequestBody BookReq req){
+//        return bookService.selectBookAll(req);
+//    }
 
 
-    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @RequestMapping(value = "update", method = {RequestMethod.POST, RequestMethod.GET})
     public Boolean updateBookById(@RequestBody BookReq req){
         return bookService.updateBookById(req);
     }
 
-    @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "save", method = {RequestMethod.POST, RequestMethod.GET})
     public Boolean saveBook(@RequestBody BookReq req){
         return bookService.saveBook(req);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
     public Boolean deleteBook(@RequestBody BookReq req){
         return bookService.deleteBook(req);
     }

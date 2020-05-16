@@ -17,11 +17,11 @@ public class BookResp {
     /**
      * 书籍ID
      */
-    public Long book_Id;
+    public Long bookId;
     /**
      * 书籍名称
      */
-    public String book_Name;
+    public String bookName;
     /**
      * 作家
      */
