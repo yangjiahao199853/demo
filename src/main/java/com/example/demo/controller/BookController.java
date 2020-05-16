@@ -31,10 +31,10 @@ public class BookController {
         return bookService.selectBook(req);
     }
 
-//    @RequestMapping(value = "getBookResp", method = RequestMethod.GET)
-//    public List<BookResp> getBookAll(@RequestBody BookReq req){
-//        return bookService.selectBookAll(req);
-//    }
+    @RequestMapping(value = "getBookResp", method = RequestMethod.GET)
+    public List<BookResp> getBookAll(@RequestBody BookReq req){
+        return bookService.selectBookAll(req);
+    }
 
 
     @RequestMapping(value = "update", method = {RequestMethod.POST, RequestMethod.GET})
