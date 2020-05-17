@@ -25,4 +25,5 @@ public class Book {
     private Date updateTime;
     @TableField(value = "booksize")
     private Long bookSize;
+    private String smallImg;
 }

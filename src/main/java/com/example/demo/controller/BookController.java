@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.example.demo.entity.Book;
 import com.example.demo.entity.BookReq;
 import com.example.demo.entity.BookResp;
 import com.example.demo.service.impl.BookServiceImpl;
@@ -31,9 +33,9 @@ public class BookController {
         return bookService.selectBook(req);
     }
 
-    @RequestMapping(value = "getBookResp", method = RequestMethod.GET)
-    public List<BookResp> getBookAll(@RequestBody BookReq req){
-        return bookService.selectBookAll(req);
+    @RequestMapping(value = "getBookPage", method = RequestMethod.GET)
+    public Page<Book> getBookAllPage(@RequestBody BookReq req){
+        return bookService.selectBookPage(req);
     }
 
 

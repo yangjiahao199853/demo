@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
+import com.example.demo.entity.ShoppingCart;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserReq;
 import com.example.demo.entity.UserResp;
@@ -60,6 +61,14 @@ public class UserServiceImpl implements UserService {
         EntityWrapper ew = new EntityWrapper();
         ew.eq(code != null, "code", code);
         return userDao.selectList(ew);
+    }
+
+
+
+    public User getUserInfoById(String name) {
+        User user=new User();
+        user.setUsername(name);
+        return userDao.selectOne(user);
     }
 
     /**
