@@ -60,12 +60,12 @@ public class IndexController {
         req.setPrice(bignum1);
         req.setPublishTime(new Date());
         req.setAuthor("罗贯中");
-        req.setBookSize(1L);
+        req.setBookSize(15L);
         Boolean s=bookService.saveBook(req);
 //        list.forEach(x->{
 //            System.out.printf(x.toString());
 //        });
-        return "增加成功";
+        return "user/common";
     }
 
     @GetMapping("user/admin")

@@ -4,6 +4,8 @@ import com.example.demo.entity.BookReq;
 import com.example.demo.entity.BookResp;
 import com.example.demo.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +46,8 @@ public class BookController {
 
     @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.GET})
     public Boolean saveBook(@RequestBody BookReq req){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
         return bookService.saveBook(req);
     }
 
