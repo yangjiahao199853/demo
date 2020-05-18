@@ -14,7 +14,7 @@ import java.util.Date;
 @TableName("book")
 public class Book {
     @TableId(value = "id",type = IdType.AUTO)
-    private Long id;
+    private Long bookId;
     @TableField(value = "book_Name")
     private String bookName;
     private String author;
@@ -25,4 +25,5 @@ public class Book {
     private Date updateTime;
     @TableField(value = "booksize")
     private Long bookSize;
+    private String smallImg;
 }

@@ -2,12 +2,14 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.ShoppingCart;
 import com.example.demo.entity.ShoppingCartReq;
+import com.example.demo.entity.ShoppingCartResp;
+import com.example.demo.entity.User;
 import com.example.demo.service.impl.ShoppingCartServiceImpl;
+import com.example.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,23 +27,27 @@ public class ShoppingCartController {
 
     @Autowired
     ShoppingCartServiceImpl shoppingCartService;
+    @Autowired
+    UserServiceImpl userService;
 
-    @ResponseBody
+
+    @RequestMapping(value = "/addShoppingCat",method = { RequestMethod.POST, RequestMethod.GET })
+    public Boolean addShoppingCat(@RequestBody ShoppingCartReq req){
+        User user=userService.getUserInfoById(SecurityContextHolder.getContext().getAuthentication().getName());
+        req.setUserId(user.getId());
+        return shoppingCartService.addShoppingCat(req);
+    }
+
     @RequestMapping(value = "/getSelectShoppingCart",method = { RequestMethod.POST, RequestMethod.GET })
-    public List<ShoppingCart> getSelectShoppingCart(HttpServletRequest request, ShoppingCartReq req){
-        HttpSession session = request.getSession();
-        Long data = (Long) session.getAttribute("userId");
-        req.setUserId(data);
+    public List<ShoppingCartResp> getSelectShoppingCart(@RequestBody ShoppingCartReq req){
+        User user=userService.getUserInfoById(SecurityContextHolder.getContext().getAuthentication().getName());
+        req.setUserId(user.getId());
         return shoppingCartService.selectShoppingCatByUserId(req);
     }
 
-
-    @ResponseBody
-    @RequestMapping(value = "/addShoppingCat",method = { RequestMethod.POST, RequestMethod.GET })
-    public Boolean addShoppingCat(HttpServletRequest request, ShoppingCartReq req){
-        HttpSession session = request.getSession();
-        Long data = (Long) session.getAttribute("userId");
-        req.setUserId(data);
-        return shoppingCartService.addShoppingCat(req);
+    @RequestMapping(value = "/deleteShoppingCart",method = { RequestMethod.POST, RequestMethod.GET })
+    public Integer deleteShoppingCart(@RequestParam Long UserId){
+        return shoppingCartService.deleteShoppingCat(UserId);
     }
+
 }

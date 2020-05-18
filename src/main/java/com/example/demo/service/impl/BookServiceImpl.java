@@ -41,13 +41,13 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
     public BookResp selectByBookId(Long Id){
         Book book=bookService.selectById(Id);
         BookResp bookResp=new BookResp();
-        BeanUtils.copyProperties(bookResp, book);
+        BeanUtils.copyProperties(book, bookResp);
         return bookResp;
     }
 
 
     /**
-     * 通过书名或作者查询书籍
+     * 通过书名或作者查询书籍,或查询全部
      * @param req
      * @return
      */
@@ -89,9 +89,9 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
     private EntityWrapper getEw(BookReq req){
         EntityWrapper ew = new EntityWrapper<>();
         ew.eq(req.getBookId()!=null,"id",req.getBookId())
-                .eq(!Strings.isNotEmpty(req.getAuthor()),"author",req.getAuthor());
+                .eq(Strings.isNotEmpty(req.getAuthor()),"author",req.getAuthor());
         if (StringUtils.isNotEmpty(req.getBookName())){
-            ew.andNew().like(BOOK_NAME,req.getBookName(), SqlLike.DEFAULT);
+            ew.like(BOOK_NAME,req.getBookName(), SqlLike.DEFAULT);
         }
         ew.orderDesc(Lists.newArrayList("update_time"));
         return ew;
