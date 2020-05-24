@@ -8,7 +8,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-@TableName("shopping_Cat")
+@TableName("shopping_cat")
 public class ShoppingCart {
     @TableId(value = "id")
     private Long id;

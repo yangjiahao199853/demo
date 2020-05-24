@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.ShoppingCart;
+
 import com.example.demo.entity.ShoppingCartReq;
 import com.example.demo.entity.ShoppingCartResp;
 import com.example.demo.entity.User;
@@ -11,8 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 /**

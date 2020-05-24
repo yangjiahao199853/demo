@@ -16,11 +16,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import com.example.demo.util.BeanUtil;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.example.demo.util.BeanUtil.*;
 
 
 /**
@@ -60,12 +61,12 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
     public List<BookResp> selectBookAll(BookReq req){
         EntityWrapper ew = getEw(req);
         List<Book> book=bookService.selectList(ew);
-        List<BookResp> resultList = book.stream().map(data -> BeanUtil.map(data, BookResp.class)).collect(Collectors.toList());
+        List<BookResp> resultList = book.stream().map(data -> map(data, BookResp.class)).collect(Collectors.toList());
         return resultList;
     }
 
     public Boolean updateBookById(BookReq req){
-        Book book=BeanUtil.map(req,Book.class);
+        Book book= map(req,Book.class);
         book.setUpdateTime(new Date());
         bookService.updateById(book);
         return true;
@@ -73,7 +74,7 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
 
 
     public Boolean saveBook(BookReq req){
-        Book book=BeanUtil.map(req,Book.class);
+        Book book= map(req,Book.class);
         book.setUpdateTime(new Date());
         bookService.insert(book);
         return true;
@@ -81,7 +82,6 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
 
 
     public Boolean deleteBook(BookReq req){
-        Book book=BeanUtil.map(req,Book.class);
         bookService.deleteBatchIds(req.getIds());
         return true;
     }
@@ -98,7 +98,7 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> {
     }
 
     public Page<Book> selectBookPage(BookReq req){
-        Page<Book> page = new Page<Book>(req.getPageNum(), req.getPageSize());// 当前页，总条数 构造 page 对象
+        Page<Book> page = new Page<>(req.getPageNum(), req.getPageSize());// 当前页，总条数 构造 page 对象
         //sql优化，OptimizeCountSql默认为true，优化，不执行select count(1)操作
         //page.setOptimizeCountSql(false);
         // 查询总记录数，默认是查询

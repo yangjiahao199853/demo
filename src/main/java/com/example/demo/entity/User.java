@@ -5,11 +5,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -22,7 +20,7 @@ public class User  implements UserDetails, Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     public Long id;
     @TableField(value = "username")
-    public String username;
+    public String userName;
     public String password;
     public String useremail;
     public int status;
@@ -39,11 +37,11 @@ public class User  implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     @Override
